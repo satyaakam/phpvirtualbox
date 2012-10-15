@@ -1,73 +1,31 @@
 -------------------------------------
-	4.2-2	2012-10-15
+	4.1-11	2012-10-03
 -------------------------------------
-Look-and-feel changes to more closely match the VirtualBox GUI
+Fixed error causing the new VM wizard not to automatically assign
+a new virtual hard disk.
+http://code.google.com/p/phpvirtualbox/issues/detail?id=582
 
-Better UI handling of long group and VM names
+Changed default setting in WebAuth plugin to look for user in
+REMOTE_USER $_SERVER variable.
 
-Fixed bug causing phpVirtualBox to not load in IE unless the
-JavaScript console was open
-
-Added config option to exclusively use phpVirtualBox's own groups
-configuration rather than VirtualBox groups - see
-config.php-example for more info
-
-Fixed bug that would leave group information (vm / group counts
-and icons) always visible after renaming a group
-
-Improved redraw logic for VM data in the Details section / tab
-
-Improved chooser grouping logic when grouping multiple items
-
-GUI state information is now saved in browser's localStorage
-instead of using cookies
-http://www.w3schools.com/html/html5_webstorage.asp
-
-Collapsed state of groups is now remembered if the browser
-supports localStorage
+Fixed bug in WebAuth plugin that would not allow login after
+session timeout.
 
 -------------------------------------
-	4.2-1	2012-10-09
+	4.1-10	2012-09-08
 -------------------------------------
-VirtualBox 4.2.x compatibility release
-
-Various regression bug fixes from beta versions
-
-Moved to using VirtualBox's passive event listener mechanism, and
-as a result:
-
-PHP session support is now required
-
-PHP minimum requirement is now at 5.2.0 (released in 2006)
+Fixed JS error in some browsers causing the New Virtual Machine
+Wizard to fail.
 
 -------------------------------------
-	4.2-0b	2012-09-27
+	4.1-9	2012-09-04
 -------------------------------------
-VirtualBox 4.2.x compatibility - beta release
-NOT ALL VirtualBox 4.2 FEATURES ARE IMPLEMENTED!!
-http://code.google.com/p/phpvirtualbox/issues/detail?id=585
+Made Hardware Virtualization options dependencies more apparent.
+http://code.google.com/p/phpvirtualbox/issues/detail?id=574
 
-Various regression bug fixes.
-
-Fixed vboxinit script for users that have /bin/false or some other
-invalid shell.
-
-Updated languages.
-
-Added advanced mode ("Hide Description") to wizards.
-
--------------------------------------
-	4.2-0	2012-09-25
--------------------------------------
-VirtualBox 4.2.x compatibility - beta release
-NOT ALL VirtualBox 4.2 FEATURES ARE IMPLEMENTED!!
-http://code.google.com/p/phpvirtualbox/issues/detail?id=585
-
-Updated jquery to 1.8.2 and jquery-ui to 1.8.23
-
-Corrected IE9 support.
-
-Removed Firefox App Tab support.
+Fixed bug in New Virtual Machine Wizard that would not allow
+one to continue after creating a new hard disk.
+http://code.google.com/p/phpvirtualbox/issues/detail?id=575
 
 -------------------------------------
 	4.1-8	2012-08-20

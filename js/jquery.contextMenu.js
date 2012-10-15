@@ -69,15 +69,15 @@ if(jQuery)( function() {
 
 						// Hide menus trigger
 						var smenu = this;
-						$('#vboxPane').bind('contextMenuShowLevel',function(e,c){
+						$('#vboxIndex').bind('contextMenuShowLevel',function(e,c){
 							if($(smenu).data('level') >= c.level && $(smenu).attr('id') != c.id) $(smenu).hide();
 						});
 						
-						$(this).detach().appendTo($('#vboxPane'));
+						$(this).detach().appendTo($('#vboxIndex'));
 						subMenus($(this),level + 1);
 					});
 									
-				};
+				}
 				
 				/*
 				 * 
@@ -95,7 +95,7 @@ if(jQuery)( function() {
 						$(menu).find('LI.hover').removeClass('hover');
 						$(this).addClass('hover');
 						
-						$('#vboxPane').trigger('contextMenuShowLevel', {'level':$(this).parent().data('level'), 'id':$(this).parent().attr('id')});
+						$('#vboxIndex').trigger('contextMenuShowLevel', {'level':$(this).parent().data('level'), 'id':$(this).parent().attr('id')});
 						
 						var subMenuId = $(this).data('subId');
 						if(subMenuId) showMenu($(this),$('#'+subMenuId),'submenu',e);
@@ -109,20 +109,18 @@ if(jQuery)( function() {
 						if( callback ) callback( $(this).attr('href').substr(1), $(srcElement), null, this); //{x: x - offset.left, y: y - offset.top, docX: x, docY: y} , this);
 						return false;
 					});
-				};
+				}
 				
 				var showMenu = function(srcElement, menu, mode, e) {
 					
 					// Check menu
-					if(!$(menu)[0]) {
-						return;
-					}
+					if(!$(menu)[0]) return;
 
 					// Detach sub menus
 					subMenus(menu,$(menu).data('level')+1);
 					
 					// Hide all other menus at this level
-					$('#vboxPane').trigger('contextMenuShowLevel', {'level':$(menu).data('level'), 'id':$(menu).attr('id')});
+					$('#vboxIndex').trigger('contextMenuShowLevel', {'level':$(menu).data('level'), 'id':$(menu).attr('id')});
 					
 					// Detect mouse position
 					var d = {};
@@ -189,7 +187,7 @@ if(jQuery)( function() {
 						if(m) {
 							$(m).addClass('contextSubMenu contextMenuLevel' + ($(menu).data('level')+1)).data('level',($(menu).data('level')+1))
 							// Hide menus trigger
-							$('#vboxPane').bind('contextMenuShowLevel',function(e,c){
+							$('#vboxIndex').bind('contextMenuShowLevel',function(e,c){
 								if($(m).data('level') >= c.level && $(m).attr('id') != c.id) $(m).hide();
 							});
 					

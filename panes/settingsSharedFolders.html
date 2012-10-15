@@ -47,7 +47,7 @@ var sButtons = new Array(
 
 	{
 		'name' : 'addshared',
-		'label' : trans('Add Shared Folder','UIMachineSettingsSF'),
+		'label' : 'Add Shared Folder',
 		'icon' : 'add_shared_folder',
 		'enabled' : function (item) { return true; },
 		'click' : function () {
@@ -82,7 +82,7 @@ var sButtons = new Array(
 
 	{
 		'name' : 'editshared',
-		'label' : trans('Edit Shared Folder','UIMachineSettingsSF'),
+		'label' : 'Edit Shared Folder',
 		'icon' : 'edit_shared_folder',
 		'enabled' : function (item) { return $(item).hasClass('vboxListItemSelected');  },
 		'click' : function () {
@@ -118,7 +118,7 @@ var sButtons = new Array(
 	
 	{
 		'name' : 'removeshared',
-		'label' : trans('Remove Shared Folder','UIMachineSettingsSF'),
+		'label' : 'Remove Shared Folder',
 		'icon' : 'remove_shared_folder',
 		'enabled' : function (item) { return $(item).hasClass('vboxListItemSelected'); },
 		'click' : function () {
@@ -136,9 +136,10 @@ var sButtons = new Array(
  );
 
 var sfToolbar = new vboxToolbarSmall(sButtons);
+sfToolbar.context = 'UIMachineSettingsSF';
 sfToolbar.addButtons('vboxSettingsSFButtons');
 
-$('#vboxSettingsSharedFoldersList').bind('select',function(e,el){sfToolbar.update(el);});
+$('#vboxSettingsSharedFoldersList').bind('select',sfToolbar.update);
 
 /* Add Shared Folder to list */
 
@@ -229,7 +230,7 @@ $(tb).append($(tr).append($('<td />').attr({'class':'vboxSettingsSFPathCell'})).
  * Add 'Transient Folders' if machine is running
  *
  */
- if(vboxVMStates.isRunning($('#vboxSettingsDialog').data('vboxMachineData')) || vboxVMStates.isSaved($('#vboxSettingsDialog').data('vboxMachineData')) || vboxVMStates.isPaused($('#vboxSettingsDialog').data('vboxMachineData'))) {
+ if($('#vboxSettingsDialog').data('vboxMachineData').state == 'Running') {
 
 	 var tb = $('<tbody />').attr({'id':'vboxSFTransientBody'}).addClass('vboxHover');
 	 var tr = $('<tr />').attr({'class':'vboxListItemDisabled'}).disableSelection();
@@ -303,7 +304,7 @@ function vboxSettingsSFEditDialog() {
 	$('<tr />').append($('<th />')).append($('<td />').html('<label><input type="checkbox" class="vboxCheckbox" id="vboxSettingsSFAM" /> ' + trans('Auto-mount','UIMachineSettingsSFDetails')+'</label>')).appendTo(tbl);
 	
 	// Add "Make Permanent"?
-	if(vboxVMStates.isRunning($('#vboxSettingsDialog').data('vboxMachineData')) || vboxVMStates.isSaved($('#vboxSettingsDialog').data('vboxMachineData')) || vboxVMStates.isPaused($('#vboxSettingsDialog').data('vboxMachineData'))) {
+	if($('#vboxSettingsDialog').data('vboxMachineData').state == 'Running') {
 		
 		$('<tr />').append($('<th />')).append($('<td />').html('<label><input type="checkbox" class="vboxCheckbox" id="vboxSettingsSFPerm" /> ' + trans('Make Permanent','UIMachineSettingsSFDetails')+'</label>')).appendTo(tbl);
 	}

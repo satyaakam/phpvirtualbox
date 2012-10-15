@@ -24,9 +24,6 @@ var $language = 'en';
 /* Set the standard VRDE Port Number / Range, e.g. 1010-1020 or 1027 */
 var $vrdeports = '9000-9010';
 
-/* Set this to true, to tell phpvirtualbox you are using Windows instead of Linux */
-var $oswindows = false;
-
 /*
  *
  * Not-so-common options / tweaking
@@ -69,27 +66,12 @@ var $servers = array(
 // Preview box pixel width
 #var $previewWidth = 180;
 
-// Max number of progress operations to keep in list
-var $maxProgressList = 5;
-
 // Change default preview aspect ratio to 1. 
 // http://www.wikipedia.org/wiki/Aspect_ratio_%28image%29#Previous_and_presently_used_aspect_ratios
 #var $previewAspectRatio = 1.6;
 
 // Enable custom VM icons
 #var $enableCustomIcons = true;
-
-/*
-Exclusively use phpVirtualBox's groups configuration rather than VirtualBox groups.
-This has the following effects:
-
-*) Group changes made in phpVirtualBox will not be reflected in VirtualBox programs such as
-	VirtualBox and VBoxManage
-*) Group changes will not affect which folder a VM is placed in
-*) You can rename groups that contain running VMs and move / copy running VMs to groups
-*/
-#var $phpVboxGroups = true;
-
 
 /*
 Allow to prompt deletion hard disk files on removal from Virtual Media Manager.
@@ -159,6 +141,17 @@ var $hostMemInfoRefreshInterval = 5;
  */
 #var $enableGuestAdditionsVersionDisplay = true;
 
+/*
+ * Display a "minimal" VM list. This will shrink the size of VMs in the VM list
+ * and exclude some information so that they take up less space.
+ */
+#var $vmListMinimal = true;
+
+/* Enable Firefox's "App Tab" notification support by changing the browser's title
+ * when something in phpVirtualBox's VM list changes or an alert is triggered.
+ */
+#var $enableAppTabSupport = true;
+
 /* Disable any of phpVirtualBox's main tabs */
 #var $disableTabVMSnapshots = true; // Snapshots tab
 #var $disableTabVMConsole = true; // Console tab
@@ -182,6 +175,31 @@ var $nicMax = 4;
  * your startup scripts list.
  */
 #var $startStopConfig = true;
+
+/* 
+	Sorting VM List options
+
+	var $vmListSort = 'name'; // Default. Sort VM list by VM name
+	var $vmListSort = 'running'; // Place running VMs at the top of the list
+	var $vmListSort = 'gui'; // Use drag-and-drop / manual vm ordering
+	var $vmListSort = 'stateChange'; // Order by VMs' last state change
+	var $vmListSort = 'os'; // Sort by OS type
+	var $vmListSort = 'function(..){...}' // uses custom javascript function. Example follows:
+	
+	// This places running VMs at the top of the list, then orders by
+	// the last VM state change, then by name. 
+	var $vmListSort = 'function(a,b) {
+		if(a.state == "Running" && b.state != "Running") return -1;
+		if(b.state == "Running" && a.state != "Running") return 1;
+		if(a.lastStateChange < b.lastStateChange) return 1;
+		if(b.lastStateChange < a.lastStateChange) return -1;
+		return strnatcasecmp(a.name,b.name);
+	}';
+	
+	NOTE: In a multi-user situation, 'gui' is probably a bad idea.
+	
+*/
+#var $vmListSort = 'name';
 
 // Authentication library.
 var $authLib = 'Builtin';
@@ -214,6 +232,16 @@ LPT support may or may not work for you.
 */
 #var $enableHDFlushConfig = true;
 
+
+/*
+ * Cache tweaking.
+ *
+ */
+// Refresh VM cache when VM Settings window is loaded. Default is true. Set to false to disable.
+var $vmConfigRefresh = true;
+
+// Path
+#var $cachePath = '/tmp';
 
 /* END SETTINGS  */
 

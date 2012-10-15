@@ -1,18 +1,15 @@
-/**
+/*
  * $Id$
- *
- * Thanks to SVG gradient generator at:
- * http://ie.microsoft.com/testdrive/graphics/svggradientbackgroundmaker/default.html
  */
 
-html,body,#vboxPane {
+html,body,#vboxIndex {
    	  background: #e9e9e9;
       border:0px solid transparent;
    	  margin:0px;
    	  padding: 0px;
    	  color: #000;
 }
-#vboxPane { padding-left: 4px;  padding-right: 4px;}
+#vboxIndex { padding-left: 4px;  padding-right: 4px;}
 
 html,body,input,select,.ui-widget, .ui-tabs, .ui-widget-content,textarea {
 	  font: 12px Tahoma,"Trebuchet MS",Verdana,Arial,Sans-serif;
@@ -21,7 +18,7 @@ html,body,input,select,.ui-widget, .ui-tabs, .ui-widget-content,textarea {
 /* 
 	Height Layout
 */
-html,body,#vboxPane,#vboxTableMain {
+html,body,#vboxIndex,#vboxTableMain {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
@@ -32,24 +29,24 @@ div.vboxMenuBar { padding-left: 4px; }
 #vboxPaneToolbar { margin-left: 4px; }
 
 /* Common */
-#vboxPane table, div.vboxDialogContent table { width: 100%; }
-#vboxPane img, div.vboxDialogContent img { vertical-align: middle; border: 0px; }
-#vboxPane textarea, div.vboxDialogContent textarea { width: 100%; }
-#vboxPane input, div.vboxDialogContent input { vertical-align: middle; }
-#vboxPane input.vboxCheckbox, div.vboxDialogContent input.vboxCheckbox,
-	#vboxPane input.vboxRadio, div.vboxDialogContent input.vboxRadio { vertical-align: middle; }
+#vboxIndex table, div.vboxDialogContent table { width: 100%; }
+#vboxIndex img, div.vboxDialogContent img { vertical-align: middle; border: 0px; }
+#vboxIndex textarea, div.vboxDialogContent textarea { width: 100%; }
+#vboxIndex input, div.vboxDialogContent input { vertical-align: middle; }
+#vboxIndex input.vboxCheckbox, div.vboxDialogContent input.vboxCheckbox,
+	#vboxIndex input.vboxRadio, div.vboxDialogContent input.vboxRadio { vertical-align: middle; }
 input.vboxRadio, input.vboxCheckbox { padding: 0px; margin: 1px 1px 3px 2px; display: inline }
-#vboxPane th, div.vboxDialogContent th { white-space: nowrap; }
-#vboxPane .vboxDisabled, div.vboxDialogContent .vboxDisabled { color: #999; cursor: default; }
-#vboxPane img.vboxDisabled {
+#vboxIndex th, div.vboxDialogContent th { white-space: nowrap; }
+#vboxIndex .vboxDisabled, div.vboxDialogContent .vboxDisabled { color: #999; cursor: default; }
+#vboxIndex img.vboxDisabled {
 	opacity: .5;
 	filter:alpha(opacity=50);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }	
-#vboxPane a, div.vboxDialogContent a,
-	#vboxPane a:visited, div.vboxDialogContent a:visited { text-decoration: none; }
-#vboxPane hr, div.vboxDialogContent hr { padding: 1px; margin: 0px; border: 0px; }
-#vboxPane .vboxSeperatorLine, div.vboxDialogContent .vboxSeperatorLine { background: #aaa; }
+#vboxIndex a, div.vboxDialogContent a,
+	#vboxIndex a:visited, div.vboxDialogContent a:visited { text-decoration: none; }
+#vboxIndex hr, div.vboxDialogContent hr { padding: 1px; margin: 0px; border: 0px; }
+#vboxIndex .vboxSeperatorLine, div.vboxDialogContent .vboxSeperatorLine { background: #aaa; }
 
 /* jQuery UI Components */
 .ui-widget-content div.vboxDialogContent, div.ui-dialog div.ui-dialog-content, div.ui-dialog div.ui-dialog-buttonpane { background: #fff; }
@@ -63,7 +60,7 @@ div.ui-dialog div.ui-dialog-buttonpane button {
 	border: 1px solid #f9f9f9;
 	background-color: #f9f9f9;
 	border-radius: 4px;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#d0d0d0');
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#c9c9c9');
 	box-shadow: inset 0 1px 3px #fff, inset 0 -15px #e9e9e9, 0 0 3px #a9a9a9;
 	-o-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #e9e9e9, 0 0 3px #a9a9a9;
 	-webkit-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #e9e9e9, 0 0 3px #a9a9a9;
@@ -111,11 +108,17 @@ input.vboxImgButton {
 .vboxBordered { border: 2px solid #999; }
 
 /* bordered sections with labels */
-div.vboxDialogContent span.vboxTableLabel, #vboxPane span.vboxTableLabel {
+div.vboxDialogContent span.vboxTableLabel, #vboxIndex span.vboxTableLabel {
 	color: #555555; font-size: 87.5%; position: relative; top: 7px; font-weight: bold; background: #fff; left: 8px; padding-left: 2px; padding-right: 2px;
- 	border-radius: 4px;
-	-moz-border-radius: 4px;	
 }
+#vboxIndex span.vboxTableLabel+div.vboxBordered, div.vboxDialogContent span.vboxTableLabel+div.vboxBordered {
+	border: 1px solid #aaaaaa;
+ 	border-radius: 4px;
+	-moz-border-radius: 4px;
+	padding-top: 8px;
+	background: #fff;
+}
+
 
 /* Lists and ListItems */
 .vboxList ul, ul.vboxList { list-style: none; margin: 0px; padding: 0px ; background: #fff; }
@@ -127,19 +130,7 @@ ul.vboxList li table tr { vertical-align: middle; }
 ul.vboxList li img { vertical-align: middle; }
 
 .vboxListItem, a.vboxListItem, .vboxListItem a { cursor: pointer; color: #000; background: #fff; }
-#vboxChooserPane table.vboxChooserVM.vboxListItemSelected.vboxHover,
-#vboxChooserPane table.vboxChooserVM.vboxListItemSelected,
-.vboxListItemSelected.vboxHover,
-.vboxListItemSelected,
-.vboxListItemSelected a,
-a.vboxListItemSelected {
-	border-color: #69F ! important;
-	background-color: #7aF !important;
-	cursor: default !important;
-	color: #fff !important;
-	/* From #85C2FF to #6699FF */
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9Imc1NzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiM4NUMyRkYiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiM2Njk5RkYiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2c1NzQpIiAvPgo8L3N2Zz4=);
-}
+.vboxListItemSelected, .vboxListItemSelected a, a.vboxListItemSelected { background-color: #69F !important; cursor: default !important; color: #fff !important; }
 .vboxListItemTitle { font-weight: bold; }
 
 ul.vboxHover li {
@@ -150,22 +141,16 @@ ul.vboxHoverBorderless li {
 	border-width: 0px;
 }
 ul.vboxHover li.vboxHover {
-	color: #000 ! important;
-	background-color: #eefffF;
-	border-color: #99CcfF;
-	/* #F0FFFF to #CFDFFF */
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9Imc3NTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGMEZGRkYiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiNDRkRGRkYiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2c3NTYpIiAvPgo8L3N2Zz4=);
+	background-color: #f0f8ff;
+	border-color: #aaaaaa;	
 }
 
 ul.vboxHover li table {
 	border: 1px solid transparent;
 }
 ul.vboxHover li table.vboxHover {
-	color: #000 ! important;
-	background-color: #eefffF;
-	border-color: #99CcfF;
-	/* #F0FFFF to #CFDFFF */
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9Imc3NTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGMEZGRkYiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiNDRkRGRkYiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2c3NTYpIiAvPgo8L3N2Zz4=);
+	background-color: #f0f8ff;
+	border-color: #aaaaaa;	
 }
 tbody.vboxHover td {
 	border: 1px solid transparent;
@@ -190,7 +175,7 @@ tbody.vboxHover td.vboxHoverMid {
 }
 tbody.vboxHover tr.vboxHover td {
 	border-color: #aaaaaa;
-	background: #e0e8ff;
+	background: #f0f8ff;
 	color: #000;
 }
 /* Tables */
@@ -211,7 +196,7 @@ table tr td.vboxFileFolderInput input.vboxText { width: 95%; }
 table tr td.vboxFileFolderInput input.vboxImgButton { width: 20px; margin-left: 2px;}
 
 /* Buttons and Toolbars */
-#vboxPane table.vboxToolbar, div.vboxDialogContent table.vboxToolbar { width: auto; }
+#vboxIndex table.vboxToolbar, div.vboxDialogContent table.vboxToolbar { width: auto; }
 .vboxToolbarButton { 
 	border: 1px solid transparent;
 	text-align: center;
@@ -227,15 +212,20 @@ table tr td.vboxFileFolderInput input.vboxImgButton { width: 20px; margin-left: 
 }
 
 .vboxToolbarGrad .vboxToolbarButtonHover {
-	/* From E9E9E9 to D9D9D9 */
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9Imc3ODYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0U5RTlFOSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI0Q5RDlEOSIgb2Zmc2V0PSIxIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZzc4NikiIC8+Cjwvc3ZnPg==);
+	background: -o-linear-gradient(top,  #e9e9e9, #d9d9d9);
+	background: -webkit-gradient(linear, left top, left bottom, from(#e9e9e9), to(#d9d9d9)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #e9e9e9, #d9d9d9); /* for firefox 3.6+ */
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', src='images/monitor_glossy.png', sizingMethod='scale');
 }
 
 .vboxToolbarGrad .vboxToolbarButtonDown {
-	/* from a9a9a9 to e9e9e9 */
 	padding: 5px 3px 3px 5px;
 	border-color: #777;
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9ImcxMDEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0E5QTlBOSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI0U5RTlFOSIgb2Zmc2V0PSIxIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZzEwMSkiIC8+Cjwvc3ZnPg==);
+	background: -webkit-gradient(linear, left top, left bottom, from(#a9a9a9), to(#e9e9e9)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #a9a9a9, #e9e9e9); /* for firefox 3.6+ */
+	background: -o-linear-gradient(top,  #a9a9a9, #e9e9e9);
+	
+	
 }
 
 /* Small Toolbar buttons */
@@ -288,8 +278,10 @@ div.vboxAlert form textarea { height: 100%; }
 
 /* main toolbar */
 .vboxToolbarGrad {
-	/* #d9d9d9 to #e9e9e9 */
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9ImcyMzAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiNEOUQ5RDkiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiNFOUU5RTkiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2cyMzApIiAvPgo8L3N2Zz4=);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d9d9d9', endColorstr='#e9e9e9'); /* for IE */
+	background: -o-linear-gradient(top, #d9d9d9, #e9e9e9);
+	background: -moz-linear-gradient(top, #d9d9d9, #e9e9e9); /* for firefox 3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, from(#d9d9d9), to(#e9e9e9)); /* for webkit browsers */
 }
 
 /* Required textboxes */
@@ -340,18 +332,9 @@ div.vboxVMMDialog div.ui-dialog-buttonpane {
 table.vboxWizard { margin: 0px; padding: 4px; border-spacing: 0px; }
 div.vboxWizard table.vboxWizard tr { vertical-align: top; }
 div.vboxWizard td.vboxWizardContent { padding: 0px 8px 0px 8px; }
-div.vboxWizard td.vboxWizardContent div.vboxOptions {
-	border: 1px solid #aaaaaa;
- 	border-radius: 4px;
-	-moz-border-radius: 4px;
-	background: url(../images/30white.png) repeat;
-	padding: 4px;
-}
 div.vboxWizard { border: 0px; padding: 0px; margin: 0px; }
 div.vboxWizard h3 { margin: 2px 0px 18px 0px; font-size: 16px; }
-div.vboxWizard table.vboxOptions th { text-align: right; }
 div.vboxWizard table.vboxOptions { margin-top: 4px; }
-div.vboxWizard table.vboxOptions tr { vertical-align:middle; }
 div.vboxWizard table.vboxOptions td { padding: 4px; }
 div.vboxWizard div.ui-dialog-buttonpane { background: #e9e9e9; border-top: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; text-align: right; padding-right: 20px; }
 div.vboxWizard {border: 1px solid #aaaaaa; border-bottom: 0px solid transparent; }
@@ -364,19 +347,12 @@ div.vboxWizard {border: 1px solid #aaaaaa; border-bottom: 0px solid transparent;
 }	
 #vboxExportProps tr,#vboxExportProps td, #vboxExportProps td div { vertical-align: middle; height: 22px; line-height: 22px;} 
 #vboxExportProps td.vboxHideOverflow, #vboxExportProps td.vboxHideOverflow div { text-wrap: unrestricted !important; word-wrap: break-word !important; overflow: hidden !important; white-space: wrap !important;}
-
 /* Import Appliance */
 #vboxImportProps tr td.vboxHeader { font-weight: bold; }
 #vboxImportProps td img.vboxSpacer { width: 16px; visibility: hidden; }
 #vboxImportProps td.vboxHardDiskImage img.vboxSpacer { width: 32px; }
-
-#vboxImportProps tr,
-#vboxImportProps td,
-#vboxImportProps td div { vertical-align: middle; height: 22px; line-height: 22px;} 
-
-#vboxImportProps td.vboxHideOverflow,
-#vboxImportProps td.vboxHideOverflow div
-{ text-wrap: unrestricted !important; word-wrap: break-word !important; overflow: hidden !important; white-space: wrap !important;}
+#vboxImportProps tr,#vboxImportProps td, #vboxImportProps td div { vertical-align: middle; height: 22px; line-height: 22px;} 
+#vboxImportProps td.vboxHideOverflow, #vboxImportProps td.vboxHideOverflow div { text-wrap: unrestricted !important; word-wrap: break-word !important; overflow: hidden !important; white-space: wrap !important;}
 
 div.vboxWizard table td.vboxApplianceHeader { border-style: solid; border-color: #666; border-width: 1px 0px 1px 0px; background: #f0f0f8; padding: 2px; white-space: nowrap; text-align: left; font-weight: bold; }
 
@@ -411,23 +387,28 @@ div.vboxWizard table td.vboxApplianceHeader { border-style: solid; border-color:
 
 /* Menu bars */
 div.vboxMenuBar { 
-	/* From #ffffff to #d9d9d9 */
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9Imc1MDYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRkZGRkYiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiNEOUQ5RDkiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2c1MDYpIiAvPgo8L3N2Zz4=);	
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d9d9d9'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#d9d9d9)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #ffffff, #d9d9d9); /* for firefox 3.6+ */
+	background: -o-linear-gradient(top, #ffffff, #d9d9d9);
+		
 }
 
 ul.vboxMenuBar li {
-	/* From #ffffff to #d9d9d9 */
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9Imc2OTMiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRkZGRkYiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiNEOUQ5RDkiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2c2OTMpIiAvPgo8L3N2Zz4=);
+	background: -webkit-gradient(linear, left top, right top, from(#ffffff), to(#d9d9d9)); /* for webkit browsers */
+	background: -moz-linear-gradient(left,  #ffffff, #d9d9d9); /* for firefox 3.6+ */
+	background: -o-linear-gradient(left,  #ffffff, #d9d9d9);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr='#ffffff', endColorstr='#d9d9d9'); /* for IE */	
 }
 
-#vboxPane div.vboxMenuBar, div.vboxDialogContent div.vboxMenuBar { border-bottom: 1px solid #aaa; padding-top: 2px; padding-bottom: 2px; margin-top: 0px; height: 100%; }
-#vboxPane div.vboxMenuBar span, div.vboxDialogContent div.vboxMenuBar span {
+#vboxIndex div.vboxMenuBar, div.vboxDialogContent div.vboxMenuBar { border-bottom: 1px solid #aaa; padding-top: 2px; padding-bottom: 2px; margin-top: 0px; height: 100%; }
+#vboxIndex div.vboxMenuBar span, div.vboxDialogContent div.vboxMenuBar span {
 	padding: 1px 8px 1px 4px; border: 1px solid transparent; cursor: default;
 	-moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; border-top-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; border-top-right-radius: 4px/*{cornerRadius}*/;
 }
-#vboxPane div.vboxMenuBar span.vboxBordered, div.vboxDialogContent div.vboxMenuBar span.vboxBordered { border: 1px solid #aaa; }
-#vboxPane ul.vboxMenuBar, div.vboxDialogContent ul.vboxMenuBar { background: #e9e9e9; border: 2px solid #aaa; margin: 0px; padding: 0px; }
-#vboxPane ul.vboxMenuBar a,div.vboxDialogContent ul.vboxMenuBar a { padding: 2px 18px 2px 28px; }
+#vboxIndex div.vboxMenuBar span.vboxBordered, div.vboxDialogContent div.vboxMenuBar span.vboxBordered { border: 1px solid #aaa; }
+#vboxIndex ul.vboxMenuBar, div.vboxDialogContent ul.vboxMenuBar { background: #e9e9e9; border: 2px solid #aaa; margin: 0px; padding: 0px; }
+#vboxIndex ul.vboxMenuBar a,div.vboxDialogContent ul.vboxMenuBar a { padding: 2px 18px 2px 28px; }
 
 /* Tree Views */
 .vboxTreeView, .vboxTreeView ul { padding: 0; margin: 0; list-style: none; }
@@ -451,264 +432,29 @@ ul.vboxMenuBar li {
 .vboxTreeView div.collapsable-hitarea { background-position: -62px -25px }
 .vboxTreeView div.expandable-hitarea { background-position: -78px -3px }
 
-/* Progress operation list */
-#vboxProgressOps { background: #fff;  border: 2px solid #aaa; border-right: 2px solid #bbb; border-bottom: 2px solid #bbb; }
-#vboxProgressOps div.ui-progressbar { height: 16px; width: 200px; }
-#vboxProgressOps table {
-	border-bottom: 1px solid #000;
-}
-#vboxProgressOps div.vboxProgressComplete {
-	background: #f9f9f9;	
-}
+
 
 /* Virtual Machine List and Top Toolbar*/
-#vboxChooserPane { background: #fff;  border: 2px solid #aaa; border-right: 2px solid #bbb; border-bottom: 2px solid #bbb; }
-/* So that resizing is consistent */
-#vboxChooserPane * { margin: 0px; padding: 0px; }
-#vboxChooserPane span.vboxServerLink { text-decoration: underline; cursor: pointer; }
-#vboxChooserPane > div { width: 300px; } /* Initial Width */
-#vboxChooserPane .vboxChooserDropTarget { height: 4px !important; padding: 0px; margin: 0px; background: transparent; }
-#vboxChooserPane div.vboxChooserGroupHeader div.vboxChooserDropTarget {
-	position: relative; left: -4px;
+#vboxPaneVMList { background: #fff;  border: 2px solid #aaa; border-right: 2px solid #bbb; border-bottom: 2px solid #bbb; }
+#vboxPaneVMList span.vboxServerLink { text-decoration: underline; cursor: pointer; }
+#vboxVMList { width: 300px; overflow: scroll; } /* Initial Width */
+#vboxVMList table, #vboxVMList div { width: 100%; }
+#vboxVMList table.vboxVMListVM { border: 1px solid transparent; }
+#vboxVMList table.vboxHover {
+	background-color: #f0f8ff;
+	border: 1px solid #aaaaaa;
 }
-div.vboxChooserGroup > div.vboxChooserDropTargetBottom {
-	position: absolute;
-	height: 4px;
-}
+#vboxPaneVMList td.vboxVMTitle { width: 100% }
+#vboxVMList table.vboxVMListVM { margin-bottom: 4px; vertical-align: top; }
+#vboxVMList table.vboxVMListVM td { padding: 0px; white-space: nowrap; }
+#vboxVMList table.vboxVMListVM span.vboxVMName { font-weight: bold; }
+#vboxVMList table.vboxVMListVM span.vboxVMState { font-size: 0.9em; }
+#vboxVMList table.vboxVMListVM td.vboxVMSessionOpen { font-style: italic; }
+#vboxPaneVMList img.vboxHostIcon { border: 1px solid #999; }
+#vboxPaneVMList img.vboxVMIcon { height: 32px; width: 32px; margin: 4px; margin-left: 6px; }
 
-#vboxChooserPane .vboxChooserDropTargetHover { background: #999; }
-#vboxChooserPane td.vboxChooserDropTarget { height: 4px; }
-#vboxChooserPane .vboxChooserDropTargetHover
-	{ background: #999; }
-#vboxChooserPane table.vboxChooserVM img { float: left; }
-#vboxChooserPane table.vboxChooserVM {
-	border: 2px solid #fff;
-	margin-bottom: 2px;
-	vertical-align: top;
-	border-collapse: collapse;
-	cursor: default;
-}
-#vboxChooserPane table.vboxHover,
-#vboxChooserPane table.vboxChooserVM.vboxHover {
-	color: #000 ! important;
-	border: 2px solid #99CcfF ! important;
-	background-color: #eefffF;
-	background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPgo8bGluZWFyR3JhZGllbnQgaWQ9ImcxMDkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CjxzdG9wIHN0b3AtY29sb3I9IiNFRUVFRkYiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiNBQURERkYiIG9mZnNldD0iMSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2cxMDkpIiAvPgo8L3N2Zz4=);	
-}
-#vboxChooserDiv table.vboxChooserVM td,
-#vboxChooserDiv table.vboxChooserVM span { white-space: nowrap; border: 0px; text-align: left;}
-#vboxChooserDiv table.vboxChooserVM span.vboxVMName { font-weight: bold; }
-#vboxChooserDiv table.vboxChooserVM span.vboxVMState { font-size: 0.9em; margin-left: 2px; }
-#vboxChooserDiv table.vboxChooserVM td.vboxVMSessionOpen { font-style: italic; }
-#vboxChooserDiv table.vboxChooserVM td.vboxVMTitle { width: 100%; }
-#vboxChooserPane img.vboxHostIcon { border: 1px solid #999; }
-#vboxChooserPane img.vboxVMIcon { height: 32px; width: 32px; margin: 0px 4px 0px 4px; padding: 0px; }
-#vboxChooserPane div.vboxChooserGroup {
-	border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border: 2px solid #bbb;
-	margin: 2px;
-}
-#vboxChooserPane div.vboxChooserGroupRoot {
-	border: 0px;
-	margin: 0px;
-}
-
-#vboxChooserPane div.vboxChooserGroupHeader {
-	
-	-moz-border-radius-topleft: 6px/*{cornerRadius}*/;
-	-webkit-border-top-left-radius: 6px/*{cornerRadius}*/;
-	border-top-left-radius: 6px/*{cornerRadius}*/;
-	
-	-moz-border-radius-topright: 6px/*{cornerRadius}*/;
-	-webkit-border-top-right-radius: 6px/*{cornerRadius}*/;
-	border-top-right-radius: 6px/*{cornerRadius}*/;
-
-	background-image: url(../images/header_grad.png);
-	background-color: #cccccc;
-	padding: 0px 0px 8px 8px;
-	margin: 0px;
-	height: 16px;
-	overflow: hidden;
-}
-#vboxChooserPane div.vboxChooserGroupHeader span {
-	cursor: default;
-	vertical-align: top;
-}
-#vboxChooserPane div.vboxVMGroupSelected {
-	border-color: #2992F7;
-}
-#vboxChooserPane div.vboxVMGroupSelected > div.vboxChooserGroupHeader {
-	background: #2992F7 !important;
-	color: #fff !important;
-}
-
-/* Text control */
-#vboxChooserPane .vboxFitToContainer {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow:ellipsis;
-	display: inline-block;
-}
-
-/* Canvas arrows */
-#vboxChooserPane div.vboxChooserGroupShowOnly > div.vboxChooserGroupHeader > canvas.vboxChooserGroupNameArrowCollapseWhite,
-#vboxChooserPane div.vboxChooserGroupShowOnly.vboxVMGroupSelected > div.vboxChooserGroupHeader > canvas.vboxChooserGroupNameArrowCollapseWhite,
-#vboxChooserPane div.vboxChooserGroupHeader > canvas.vboxChooserGroupNameArrowCollapseWhite {
-	display: none;
-}
-#vboxChooserPane div.vboxChooserGroupHeader > canvas.vboxChooserGroupNameArrowCollapseGrey {
-	display: inline;
-}
-#vboxChooserPane div.vboxVMGroupSelected > div.vboxChooserGroupHeader > canvas.vboxChooserGroupNameArrowCollapseWhite {
-	display: inline;
-}
-#vboxChooserPane div.vboxVMGroupSelected > div.vboxChooserGroupHeader > canvas.vboxChooserGroupNameArrowCollapseGrey {
-	display: none;
-}
-/* Arrows on left side of header */
-#vboxChooserPane div.vboxChooserGroupHeader .vboxChooserGroupNameArrowLeft {
-	display: inline-block;
-	position: relative;
-	left: -5px;
-	top: -2px;
-	vertical-align: top;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-	width: 18px;
-	height: 18px;
-	background-repeat: no-repeat;
-}
-#vboxChooserPane div.vboxChooserGroupHeader span.vboxChooserGroupNameArrowCollapse {
-	background-image: url(../images/arrow_grad_up.png);
-}
-
-#vboxChooserPane div.vboxVMGroupCollapsed {
-	background: #69F;
-}
-#vboxChooserPane div.vboxChooserGroupShowOnly.vboxVMGroupCollapsed {
-	background: #fff;
-}
-#vboxChooserPane div.vboxVMGroupCollapsed span.vboxChooserGroupNameArrowCollapse {
-	background-image: url(../images/arrow_grad_dn.png);
-}
-#vboxChooserPane div.vboxVMGroupSelected > div.vboxChooserGroupHeader span.vboxChooserGroupNameArrowCollapse {
-	background-image: url(../images/arrow_white_up.png);
-}
-#vboxChooserPane div.vboxVMGroupSelected.vboxVMGroupCollapsed > div.vboxChooserGroupHeader  span.vboxChooserGroupNameArrowCollapse {
-	background-image: url(../images/arrow_white_dn.png);
-}
-
-#vboxChooserPane div.vboxChooserGroupVMs { padding: 2px 2px 0px 2px; }
-#vboxChooserPane div.vboxChooserGroup span.vboxChooserGroupName { font-weight: bold; display: inline-block}
-#vboxChooserPane div.vboxChooserGroup span.vboxChooserGroupInfo { float: right; display: none; position: relative; top: -1px; }
-#vboxChooserPane div.vboxChooserGroup span.vboxChooserGroupInfo img { margin-left: 2px; margin-right: 2px; }
-#vboxChooserPane div.vboxChooserGroup div.vboxHover span.vboxChooserGroupInfo { display: inline; }
-#vboxChooserPane div.vboxChooserGroupHeader div.vboxChooserDropTargetBottom { display: none; }
-
-
-#vboxChooserPane div.vboxVMGroupCollapsed div.vboxChooserGroup,
-#vboxChooserPane div.vboxVMGroupCollapsed div.vboxChooserGroupVMs,
-#vboxChooserPane div.vboxVMGroupCollapsed div.vboxChooserDropTargetBottom
-{ display: none; }
-#vboxChooserPane div.vboxVMGroupCollapsed div.vboxChooserGroupHeader div.vboxChooserDropTargetBottom
-{ display: block; }
-
-#vboxChooserPane div.vboxVMGroupCollapsed div.vboxChooserGroupHeader {
-	display: block;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-}
-
-
-/* Hide / show only 1 group */
-#vboxChooserPane div.vboxChooserGroupHide {
-	border: 0px;
-	margin: 0px;
-	padding: 0px;
-}
-
-#vboxChooserPane div.vboxChooserGroupRootLevel {}
-#vboxChooserPane div.vboxChooserGroupHide > div, /* all children of hidden elements are hidden */
-#vboxChooserPane div.vboxChooserGroupHide div.vboxChooserGroupHeader, /* all headers are hidden */
-#vboxChooserPane div.vboxChooserGroupHide div.vboxChooserGroupVMs, /* VM lists are hidden */
-#vboxChooserPane div.vboxChooserGroupHideShowContainer div.vboxChooserGroupShowOnly ~ div, /* siblings of only group shown are hidden */
-#vboxChooserPane div.vboxChooserGroupHideShowContainer ~ div /* siblings of parent containers are hidden */
-{
-	display: none;
-}
-
-#vboxChooserPane div.vboxChooserGroupHideShowContainer > div.vboxChooserGroup, /* each parent container group list must be shown */
-#vboxChooserPane div.vboxChooserGroupShowOnly div.vboxChooserGroup, /* sub-groups are shown */
-#vboxChooserPane div.vboxChooserGroupShowOnly div.vboxChooserGroupHeader, /* headers shown */
-#vboxChooserPane div.vboxChooserGroupShowOnly div.vboxChooserGroupVMs /* vm lists are shown */
-{ 
-	display: block;
-}
-/* except for collapsed ones */
-#vboxChooserPane div.vboxChooserGroupShowOnly div.vboxVMGroupCollapsed div.vboxChooserGroup,
-#vboxChooserPane div.vboxChooserGroupShowOnly div.vboxVMGroupCollapsed div.vboxChooserGroupVMs,
-#vboxChooserPane div.vboxChooserGroupShowOnly div.vboxVMGroupCollapsed div.vboxChooserDropTargetBottom
-{ display: none; }
-
-#vboxChooserPane div.vboxChooserGroupHideShowContainer > div.vboxChooserGroup {
-	margin: 0px;
-	padding: 0px;
-}
-#vboxChooserPane div.vboxChooserGroupShowOnly {
-	margin: 2px;
-	display: block;
-	border: 0px;
-}
-
-#vboxChooserPane div.vboxChooserGroupShowOnly > div.vboxChooserGroupHeader {
-	-moz-border-radius-bottomleft: 8px/*{cornerRadius}*/; -webkit-border-bottom-left-radius: 8px/*{cornerRadius}*/; border-bottom-left-radius: 8px/*{cornerRadius}*/; -moz-border-radius-bottomright: 8px/*{cornerRadius}*/; -webkit-border-bottom-right-radius: 8px/*{cornerRadius}*/; border-bottom-right-radius: 8px/*{cornerRadius}*/;	
-	-moz-border-radius-topleft: 0px/*{cornerRadius}*/; -webkit-border-top-left-radius: 0px/*{cornerRadius}*/; border-top-left-radius: 0px/*{cornerRadius}*/; -moz-border-radius-topright: 0px/*{cornerRadius}*/; -webkit-border-top-right-radius: 0px/*{cornerRadius}*/; border-top-right-radius: 0px/*{cornerRadius}*/;
-	display: block;
-	margin-left: 2px;
-	margin-right: 2px;
-}
-
-#vboxChooserPane div.vboxChooserGroupShowOnly > div.vboxChooserGroupHeader > span.vboxChooserGroupInfo {
-	margin-right: 2px;
-}
-#vboxChooserPane div.vboxChooserGroupShowOnly > div.vboxChooserGroupHeader span.vboxChooserGroupShowOnly,
-#vboxChooserPane div.vboxChooserGroupShowOnly > div.vboxChooserGroupHeader .vboxChooserGroupNameArrowCollapse {
-	display: none;
-}
-#vboxChooserPane div.vboxChooserGroupShowOnly > div.vboxChooserGroupHeader span.vboxChooserGroupShowOnlyBack {
-	display: inline-block;
-}
-
-#vboxChooserPane div.vboxChooserGroupHeader span.vboxChooserGroupShowOnly {
-	position: relative;
-	top: -1px;
-	display: inline-block;
-	margin: 0px;
-	margin-left: 2px;
-	margin-right: 2px;
-	padding: 0px;
-	cursor: pointer;
-	width: 18px;
-	height: 18px;
-	background-repeat: no-repeat;
-	background-image: url(../images/arrow_grad_right.png);
-}
-#vboxChooserPane div.vboxVMGroupSelected > div.vboxChooserGroupHeader span.vboxChooserGroupShowOnly {
-	background-image: url(../images/arrow_white_right.png);
-}
-
-#vboxChooserPane div.vboxChooserGroupHeader span.vboxChooserGroupShowOnlyBack {
-	background-image: url(../images/arrow_grad_left.png);
-	display: none;
-}
-#vboxChooserPane div.vboxVMGroupSelected > div.vboxChooserGroupHeader span.vboxChooserGroupShowOnlyBack {
-	background-image: url(../images/arrow_white_left.png);
-}
-
+/* Minimal sizes */
+#vboxVMList table.vboxVMListMinimal img { height: 16px; width: 16px; padding: 0px; margin: 2px; margin-left: 2px; }
 
 /* Toolbar above vm list */
 #vboxPaneToolbar { float: left; }
@@ -723,122 +469,56 @@ table.vboxToolbar td.vboxDisabled { color: #999; }
 #vboxTabVMDetails .vboxDetailsNone { font-style: italic; }
 #vboxDetailsWelcome { background: #fff; }
 table.vboxDetailsTable { width: auto; }
-table.vboxDetailsTable td { padding: 2px;}
+table.vboxDetailsTableBox tr.vboxDetailsHead th { white-space: nowrap; }
+table.vboxDetailsTable td { padding: 2px; }
 table.vboxDetailsTable a, table.vboxDetailsTable a:visited { color: #0000FF; }
-table.vboxDetailsTable tr th.vboxDetailsSection { text-align: left; font-weight: bold; }
+table.vboxDetailsTable tr th.vboxDetailsSection { text-align: left; font-weight: bold; margin-top: 10px }
 table.vboxDetailsTable tr th.vboxDetailName { text-align: left; white-space: nowrap; padding-left: 20px; font-weight: normal; }
-table.vboxDetailsTable tr th.vboxDetailNameIndent { padding-left: 35px; }
+table.vboxDetailsTable tr th.vboxDetailNameIndent { text-align: left; white-space: nowrap; padding-left: 35px; font-weight: normal;}
 table.vboxDetailsTable tr td.vboxDetailsValue { text-align: left; white-space: normal; width: 100%; padding-left: 35px; }
-
 table.vboxDetailsTableError { background: #eee; margin-top: 8px;; border: 2px solid #aaa; }
 table.vboxDetailsTableError tr { vertical-align: top; }
-
-table.vboxDetailsTableBox tr.vboxDetailsHead th { white-space: nowrap; }
 /* Details table boxes */
-table.vboxDetailsTableBox {
-	background: #fff;
-	margin: 0px;
-	width: 100%;
-	border: 0px solid transparent;
-	border-spacing: 0px;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
+table.vboxDetailsTableBox { background: #fff; margin-bottom: 10px; width: 100%; border-collapse: collapse; border-spacing: 0px;
+	-moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; border-top-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; border-top-right-radius: 4px/*{cornerRadius}*/;
 }
 /* Safari / Chrome "fix" */
 table.vboxDetailsTableBox img::selection { color: transparent; }
 
+table.vboxDetailsTableBox tr.vboxDetailsHead {
+	-moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; border-top-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; border-top-right-radius: 4px/*{cornerRadius}*/;
+}
 table.vboxDetailsTableBox tr.vboxDetailsHead th.vboxDetailsSection {
-	padding: 0px;
+	-moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; border-top-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; border-top-right-radius: 4px/*{cornerRadius}*/;
+	padding: 1px;
 	margin: 0px;
 	background-color: #cccccc;
 }
 table.vboxDetailsTableBox tr.vboxDetailsHead th.vboxDetailsSection div {
-	-moz-border-radius-topleft: 8px/*{cornerRadius}*/; -webkit-border-top-left-radius: 8px/*{cornerRadius}*/; border-top-left-radius: 8px/*{cornerRadius}*/; -moz-border-radius-topright: 8px/*{cornerRadius}*/; -webkit-border-top-right-radius: 8px/*{cornerRadius}*/; border-top-right-radius: 8px/*{cornerRadius}*/;
+	-moz-border-radius-topleft: 4px/*{cornerRadius}*/; -webkit-border-top-left-radius: 4px/*{cornerRadius}*/; border-top-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-topright: 4px/*{cornerRadius}*/; -webkit-border-top-right-radius: 4px/*{cornerRadius}*/; border-top-right-radius: 4px/*{cornerRadius}*/;
 	background-image: url(../images/header_grad.png);
 	background-color: #cccccc;
-	padding: 4px 4px 4px 8px;
+	padding: 3px 3px 3px 6px;
 	margin: 0px;
 	height: 16px;
 }
-#vboxTabVMDetails div.vboxDetailsBorder {
-	border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border: 2px solid #bbb;
-	margin-bottom: 2px;
-}
-#vboxTabVMDetails div.vboxDetailsBorder table, #vboxTabVMDetails div.vboxDetailsBorder tbody, #vboxTabVMDetails div.vboxDetailsBorder tbody::last-child, #vboxTabVMDetails div.vboxDetailsBorder tbody::last-child td {
-	-moz-border-radius-bottomleft: 8px/*{cornerRadius}*/;
-	-webkit-border-bottom-left-radius: 8px/*{cornerRadius}*/;
-	border-bottom-left-radius: 8px/*{cornerRadius}*/;
-	-moz-border-radius-bottomright: 8px/*{cornerRadius}*/;
-	-webkit-border-bottom-right-radius: 8px/*{cornerRadius}*/;
-	border-bottom-right-radius: 8px/*{cornerRadius}*/;
-	border: 0px;
-	border-collapse: collapse;
-	border-spacing: 0px;
-	
+table.vboxDetailsTableBox tr.vboxDetailsHead th.vboxDetailsSectionCollapsed {
+	-moz-border-radius-bottomleft: 4px/*{cornerRadius}*/; -webkit-border-bottom-left-radius: 4px/*{cornerRadius}*/; border-bottom-left-radius: 4px/*{cornerRadius}*/; -moz-border-radius-bottomright: 4px/*{cornerRadius}*/; -webkit-border-bottom-right-radius: 4px/*{cornerRadius}*/; border-bottom-right-radius: 4px/*{cornerRadius}*/;
 }
 
-
-/**
- * 
- * Collapsed details sections
- */
-#vboxTabVMDetails div.vboxDetailsSectionCollapsed tbody { display: none; }
-div.vboxDetailsSectionCollapsed table.vboxDetailsTableBox,
-div.vboxDetailsSectionCollapsed table.vboxDetailsTableBox thead
-div.vboxDetailsSectionCollapsed table.vboxDetailsTableBox tr.vboxDetailsHead,
-div.vboxDetailsSectionCollapsed table.vboxDetailsTableBox tr.vboxDetailsHead th,
-div.vboxDetailsSectionCollapsed table.vboxDetailsTableBox tr.vboxDetailsHead th.vboxDetailsSection div { 
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-}
-
-
-/**
- * Show link colors on hover?
- *
- */
-table.vboxDetailsTableBox tr.vboxDetailsHead a, #vboxTabVMDetails div.hover table.vboxDetailsTableBox tr.vboxDetailsHead th div.vboxNoLinks a {
+table.vboxDetailsTableBox tr.vboxDetailsHead a, table.vboxDetailsTableBox tr.vboxDetailsHead th.hover div.vboxNoLinks a {
 	color: #000;
 	cursor: default;
 }
-#vboxTabVMDetails div.hover table.vboxDetailsTableBox tr.vboxDetailsHead a {
+table.vboxDetailsTableBox tr.vboxDetailsHead th.hover a {
 	color: #0000ff;
 	cursor: pointer;
 }
 
-/**
- * Image (or canvas) for showing / hiding a details section
- */
-#vboxTabVMDetails div.vboxDetailsBorder tr.vboxDetailsHead .vboxDetailsUpDnImg {
- 	float:right;
-	position: relative;
-	top: -1px;
-	width: 18px;
-	height: 18px;
-	background-repeat: no-repeat;
-}
+table.vboxDetailsTableBox tr.vboxDetailsHead th span.vboxDetailsUpDnImgSpan { display: none; }
+table.vboxDetailsTableBox tr.vboxDetailsHead th.hover span.vboxDetailsUpDnImgSpan { display: inline; cursor: pointer; }
 
-#vboxTabVMDetails div.vboxDetailsSectionCollapsed tr.vboxDetailsHead span.vboxDetailsUpDnImg {
-	background-image: url(../images/arrow_grad_dn.png);
-}
-#vboxTabVMDetails tr.vboxDetailsHead span.vboxDetailsUpDnImg {
-	background-image: url(../images/arrow_grad_up.png);
-}
- 
-#vboxTabVMDetails table.vboxDetailsTableBox .vboxDetailsUpDnImg
-{ display: none; }
-
-#vboxTabVMDetails div.hover table.vboxDetailsTableBox .vboxDetailsUpDnImg
-{ display: inline; cursor: pointer; }
-
-
-/* misc ??? */
-table.vboxDetailsTableBox tr.vboxDetailsHead th { padding: 6px; padding-left: 8px; }
+table.vboxDetailsTableBox tr.vboxDetailsHead th { padding: 4px; padding-left: 8px; }
 table.vboxDetailsTableBox tr.vboxDetailsHead img { padding-right: 4px; }
 /* same as th.vboxDetailName */
 table.vboxDetailsTable td.vboxDetailDescriptionCell { padding-left: 20px; }
@@ -847,15 +527,10 @@ table.vboxDetailsTable td.vboxDetailDescriptionCell { padding-left: 20px; }
 #vboxDetailsShowMenu li, #vboxDetailsShowMenu li span { cursor: default; }
 #vboxDetailsShowMenu li input, #vboxDetailsPreviewMenu li input { display: inline; padding: 0px; margin: 0px; margin-right: 4px; margin-left: 4px;}
 
-/**
- * Details preview box
- */
-#vboxVMDetails table div.vboxVMDetailsBoxpreview { margin-left: 2px; }
-#vboxTabVMDetails table.vboxPreviewTable td { padding: 0px; margin: 0px; border: 0px; }
-#vboxTabVMDetails .vboxDetailsTableBoxPreview { text-align: center; }
-#vboxTabVMDetails .vboxDetailsTableBoxPreview div,
-#vboxTabVMDetails .vboxDetailsTableBoxPreview span { padding: 0px; margin: 0px; border: 0px; }
-#vboxTabVMDetails .vboxDetailsTableBoxPreview table, #vboxTabVMDetails .vboxDetailsTableBoxPreview td, #vboxTabVMDetails .vboxDetailsTableBoxPreview img { padding: 0px; margin: 0px; border: 0px; }
+/* preview box */
+#vboxDetailsTableBoxPreviewSpacer { padding: 4px; }
+#vboxDetailsTableBoxPreview { text-align: center; }
+#vboxDetailsTableBoxPreview table, #vboxDetailsTableBoxPreview td, #vboxDetailsTableBoxPreview img { padding: 0px; margin: 0px; border: 0px; }
 div.vboxPreviewSaved {
 	background-color:#000;
 }
@@ -866,11 +541,7 @@ div.vboxPreviewSaved img {
 	
 }
 
-/**
- *
- * Host meory used
- *
- */
+/* Host mem used */
 #vboxHostMemUsed {
 	border: 1px solid #aaaaaa;
 	border-radius: 4px;
@@ -888,11 +559,11 @@ div.vboxPreviewSaved img {
 #vboxHostMemUsed div { padding:0px; margin: 0px; height: 14px; width: 1px; }
 
 
-/**
- *
- * Settings Dialogs
- *
- */
+/* Description tab */
+#vboxTabVMDescription input { margin: 8px; }
+#vboxTabVMDescription textarea { width: 100%; display: block; }
+
+/* Settings Dialogs */
 #vboxSettingsDialog, div.vboxSettingsDialog div.ui-dialog-buttonpane { 
 	background: #e9e9e9;	
 }

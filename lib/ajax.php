@@ -37,7 +37,8 @@ global $_SESSION;
 $vboxRequest = clean_request();
 
 global $response;
-$response = array('data'=>array(),'errors'=>array(),'persist'=>array(),'messages'=>array());
+$response = array('data'=>array(),'errors'=>array(),'persist'=>array());
+
 
 /*
  * Built-in requests
@@ -66,7 +67,6 @@ try {
 			$response['data'] = get_object_vars($settings);
 			$response['data']['host'] = parse_url($response['data']['location']);
 			$response['data']['host'] = $response['data']['host']['host'];
-			$response['data']['phpvboxver'] = @constant('PHPVBOX_VER');
 			
 			// Session
 			session_init();
@@ -93,7 +93,6 @@ try {
 			$response['data']['version'] = $vbox->getVersion();
 			$response['data']['hostOS'] = $vbox->vbox->host->operatingSystem;
 			$response['data']['DSEP'] = $vbox->getDsep();
-			$response['data']['groupDefinitionKey'] = ($settings->phpVboxGroups ? vboxconnector::phpVboxGroupKey : 'GUI/GroupDefinitions');
 			
 			break;
 	
@@ -120,8 +119,7 @@ try {
 			$settings->auth->login($vboxRequest['u'], $vboxRequest['p']);
 			
 			// We're done writing to session
-			if(function_exists('session_write_close'))
-				@session_write_close();
+			if(function_exists('session_write_close')) @session_write_close();
 			
 			
 		
@@ -131,29 +129,37 @@ try {
 		case 'getSession':
 			
 			
-			if(!function_exists('session_start')) {
-				throw new Exception("PHP session support is required by phpVirtualBox but is not enabled or available in your PHP installation.", vboxconnector::PHPVB_ERRNO_FATAL);
-			}
-
-			session_init(true);
-
 			$settings = new phpVBoxConfigClass();
 			if(method_exists($settings->auth,'autoLoginHook'))
 			{
 				// Session
-				
+				session_init(true);
 				$settings->auth->autoLoginHook();
+				session_write_close();
 				
-				// We're done writing to session
-				if(function_exists('session_write_close'))
-					@session_write_close();
-			
+			} else {
+				
+				// Session
+				session_init();				
+				
 			}
-
-			session_write_close();
 			
 			$response['data'] = $_SESSION;
 			$response['data']['result'] = 1;
+			break;
+			
+		/*
+		 * Log out of phpVirtualBox. Passed to auth module's
+		 * logout method.
+		 */
+		case 'logout':
+
+			// Session
+			session_init(true);
+			
+			$settings = new phpVBoxConfigClass();
+			$settings->auth->logout($response);
+			
 			break;
 			
 		/*
@@ -234,27 +240,7 @@ try {
 						
 			$response['data']['result'] = 1;
 			break;
-
-		/*
-		 * Log out of phpVirtualBox. Passed to auth module's
-		 * logout method.
-		 */
-		case 'logout':
-		
-			// Session
-			session_init(true);
-				
-			$vbox = new vboxconnector();
-			$vbox->skipSessionCheck = true;
-			
-			$settings = new phpVBoxConfigClass();
-			$settings->auth->logout($response);
-				
-			session_destroy();
-		
-			break;
-					
-					
+						
 		/*
 		 * If the above cases did not match, assume it is a request
 		 * that should be passed to vboxconnector.
@@ -262,8 +248,8 @@ try {
 		default:
 	
 			$vbox = new vboxconnector();
-
-			// init session and keep it open
+			
+			// Session
 			session_init(true);
 			
 			/*
@@ -271,73 +257,13 @@ try {
 			 * been deleted since login, and update admin credentials.
 			 */
 			if($_SESSION['user'] && ((intval($_SESSION['authCheckHeartbeat'])+60) < time())) {
-				
 				$vbox->settings->auth->heartbeat($vbox);
 			}
 			
-			/*
-			 *  Persistent session config
-			 */
-			if(@$vbox->persistentSessionConfig[$vboxRequest['fn']]) {
-
-				// Get handler held in session for each config item
-				$hc = $vbox->persistentSessionConfig[$vboxRequest['fn']];
-					
-				// Array key in cookie that we are looking for
-				$sessionKeyPrefix = $vbox->settings->key.'vboxPersistentHandle'.$hc['keyName'].
-					(($hc['keyValue'] && $vboxRequest[$hc['keyValue']]) ? $vboxRequest[$hc['keyValue']] : '');
-				
-				// Each handle
-				foreach($hc['items'] as $h) {
-					$vbox->persistentRequest[$h] = @$_SESSION[$sessionKeyPrefix.'-'.$h];
-				}
-
-			} else {
-				
-				// Persistent session config is not set, close session
-				session_write_close();
-				
-				/*
-				 * Check for presistent request in $vboxRequest
-				 */
-				if(is_array($vboxRequest['persist'])) {
-					foreach($vboxRequest['persist'] as $k => $v) {
-						$vbox->persistentRequest[$k] = $v;
-					}
-				}
-			}
+			// We're done writing to session
+			if(function_exists('session_write_close')) @session_write_close();
 			
-			
-			/*
-			 * Call to vboxconnector
-			 */
 			$vbox->$vboxRequest['fn']($vboxRequest,array(&$response));
-			
-			/*
-			 * Save persistent items in session
-			 */
-			if(@$vbox->persistentSessionConfig[$vboxRequest['fn']]) {
-			
-				// Get handler held in session for each config item
-				$hc = $vbox->persistentSessionConfig[$vboxRequest['fn']];
-					
-				// Array key in cookie that we are looking for
-				$sessionKeyPrefix = $vbox->settings->key.'vboxPersistentHandle'.$hc['keyName'].
-					(($hc['keyValue'] && $vboxRequest[$hc['keyValue']]) ? $vboxRequest[$hc['keyValue']] : '');
-				
-				// Each handle
-				foreach($hc['items'] as $h) {
-					if($vbox->persistentRequest[$h]) {
-						$_SESSION[$sessionKeyPrefix.'-'.$h] = $vbox->persistentRequest[$h];	
-					} else {
-						unset($_SESSION[$sessionKeyPrefix.'-'.$h]);
-					}
-				}
-				
-				session_write_close();
-				
-				
-			}
 			
 	} // </switch()>
 
@@ -355,21 +281,6 @@ try {
 	$vbox->errors[] = $e;
 }
 
-/*
- * Send back persistent request in response
-*/
-if($vbox && is_array($vbox->persistentRequest)) {
-
-	foreach($vbox->persistentRequest as $k => $v)
-		if($v) $response['persist'][$k] = $v;
-
-}
-
-// Add any messages
-if($vbox && count($vbox->messages)) {
-	foreach($vbox->messages as $m)
-		$response['messages'][] = 'vboxconnector('.$vboxRequest['fn'] .'): ' . $m;
-}
 // Add other error info
 if($vbox && $vbox->errors) {
 	
@@ -383,8 +294,6 @@ if($vbox && $vbox->errors) {
 		# Add connection details to connection errors
 		if($e->getCode() == vboxconnector::PHPVB_ERRNO_CONNECT && isset($vbox->settings))
 			$d .= "\n\nLocation:" . $vbox->settings->location;
-		
-		$response['messages'][] = $e->getMessage().' ' . $details;
 		
 		$response['errors'][] = array(
 			'error'=>$e->getMessage(),

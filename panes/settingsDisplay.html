@@ -119,13 +119,13 @@
 $('#vboxSettingsDisplayRDPAuthID').find('option').html(function(i,h){return trans(h,'VBoxGlobal');});
 
 $('#vboxSettingsDisplayMemory').data('form','frmVboxSettings');
-$('#vboxSettingsDisplayMemory').slider({'min':parseInt($('#vboxPane').data('vboxSystemProperties').minGuestVRAM),'max':parseInt($('#vboxPane').data('vboxSystemProperties').maxGuestVRAM)});
+$('#vboxSettingsDisplayMemory').slider({'min':parseInt($('#vboxIndex').data('vboxSystemProperties').minGuestVRAM),'max':parseInt($('#vboxIndex').data('vboxSystemProperties').maxGuestVRAM)});
 $('#vboxSettingsDisplayMemory').slider('value',parseInt($('#vboxSettingsDialog').data('vboxMachineData').VRAMSize));
 
 /* Unsupported at this time 
 
 $('#vboxSettingsDisplayMonitors').data('form','frmVboxSettings');
-$('#vboxSettingsDisplayMonitors').slider({'min':1,'max':parseInt($('#vboxPane').data('vboxSystemProperties').maxGuestMonitors)});
+$('#vboxSettingsDisplayMonitors').slider({'min':1,'max':parseInt($('#vboxIndex').data('vboxSystemProperties').maxGuestMonitors)});
 $('#vboxSettingsDisplayMonitors').slider('value',parseInt($('#vboxSettingsDialog').data('vboxMachineData').monitorCount));
 
 document.forms['frmVboxSettings'].vboxSettingsDisplay3d.checked = ($('#vboxSettingsDialog').data('vboxMachineData').accelerate3DEnabled);
@@ -159,14 +159,14 @@ if(!($('#vboxSettingsDialog').data('vboxMachineData').VRDEServer && $('#vboxSett
 		document.forms['frmVboxSettings'].vboxSettingsDisplayRDPMulti.checked = true;
 	}
 	
-	if(!$('#vboxPane').data('vboxConfig').enableAdvancedConfig)
+	if(!$('#vboxIndex').data('vboxConfig').enableAdvancedConfig)
 		$('#vboxSettingsDisplayRDPAddrRow').css('display','none');
 }
 
 /* Disable non-editable items when VM is running */
 $('#vboxSettingsDialog').one('show',function(){
 	
-	if(!$('#vboxSettingsDialog').data('vboxFullEdit')) {
+	if($('#vboxSettingsDialog').data('vboxMachineData').state == 'Running') {
 		
 		var p = $('#vboxSettingsTabDisplayVideo').parent().children('div'); 
 		$(p).find('tr:not(.vboxRunningEnabled)').find('span').addClass('disabled');

@@ -44,7 +44,7 @@
 
 	{
 		'name' : 'usbnew',
-		'label' : trans('Add Empty Filter','UIMachineSettingsUSB'),
+		'label' : 'Add Empty Filter',
 		'icon' : 'usb_new',
 		'click' : function () {
 			var currUsbName = 1;
@@ -63,7 +63,7 @@
 
 	{
 		'name' : 'usbnewdevice',
-		'label' : trans('Add Filter From Device','UIMachineSettingsUSB'),
+		'label' : 'Add Filter From Device',
 		'icon' : 'usb_add',
 		'click' : function (e) {
 
@@ -116,7 +116,7 @@
 	
 	{
 		'name' : 'usbedit',
-		'label' : trans('Edit Filter','UIMachineSettingsUSB'),
+		'label' : 'Edit Filter',
 		'icon' : 'usb_filter_edit',
 		'enabled' : function (item) { return (item && $(item).data('filter') && $(item).data('filter').name); },
 		'click' : function () {
@@ -149,7 +149,7 @@
           	
           	$('<tr />').append($('<th />').attr({'style':'white-space: nowrap; width: auto; text-align: right;'}).html(trans('Remote:','UIMachineSettingsUSBFilterDetails'))).append($('<td />').attr({'style':'width: 100%'}).append(sel)).appendTo(tbl);
           	
-          	$(d).append(tbl).appendTo($('#vboxPane'));
+          	$(d).append(tbl).appendTo($('#vboxIndex'));
           	
 			var buttons = { };
 			buttons[trans('OK','QIMessageBox')] = function() {
@@ -174,7 +174,7 @@
 
 	{
 		'name' : 'usbremove',
-		'label' : trans('Remove Filter','UIMachineSettingsUSB'),
+		'label' : 'Remove Filter',
 		'icon' : 'usb_remove',
 		'enabled' : function (item) { return (item && $(item).data('filter') && $(item).data('filter').name); },
 		'click' : function () {
@@ -194,7 +194,7 @@
 	
 	{
 		'name' : 'usbup',
-		'label' : trans('Move Filter Up','UIMachineSettingsUSB'),
+		'label' : 'Move Filter Up',
 		'icon' : 'usb_moveup',
 		'enabled' : function (item) {
 			return (item && $(item).data('filter') && $(item).data('filter').name && $(item).attr('id') != $('#vboxSettingsUSBFilterList').children().first().attr('id'));
@@ -216,7 +216,7 @@
 	
 	{
 		'name' : 'usbdown',
-		'label' : trans('Move Filter Down','UIMachineSettingsUSB'),
+		'label' : 'Move Filter Down',
 		'icon' : 'usb_movedown',
 		'enabled' : function (item) {
 			return (item && $(item).data('filter') && $(item).data('filter').name && $(item).attr('id') != $('#vboxSettingsUSBFilterList').children().last().attr('id'));
@@ -239,9 +239,10 @@
  );
 
 var usbToolbar = new vboxToolbarSmall(sButtons);
+usbToolbar.context = 'UIMachineSettingsUSB';
 usbToolbar.addButtons('vboxSettingsUSBButtons');
 
-$('#vboxSettingsUSBFilterList').bind('select',function(e,el){usbToolbar.update(el);});
+$('#vboxSettingsUSBFilterList').bind('select',usbToolbar.update);
 
 
 
@@ -250,7 +251,7 @@ function vboxSettingsAddUSBFilter(f,noColor) {
 	
 	var li = $('<li />').data({'filter':f}).attr({'id':'vboxSettingsUSBFilterNumber' + (Math.floor(Math.random()*1000)),'class':'vboxListItem'});
 	
-	if(document.forms['frmVboxSettings'].vboxSettingsUSBEnabled.checked) {
+	if(!($('#vboxSettingsDialog').data('vboxMachineData').state == 'Running' && !document.forms['frmVboxSettings'].vboxSettingsUSBEnabled.checked)) {
 		
 		li.click(function(){
 			$(this).parent().children().removeClass('vboxListItemSelected');
@@ -272,7 +273,7 @@ function vboxSettingsAddUSBFilter(f,noColor) {
 
 // set checkboxes for USB and EHCI
 document.forms['frmVboxSettings'].vboxSettingsUSBEnabled.checked = ($('#vboxSettingsDialog').data('vboxMachineData').USBController.enabled);
-document.forms['frmVboxSettings'].vboxSettingsUSBEnabledEHCI.checked = ($('#vboxSettingsDialog').data('vboxMachineData').USBController.enabledEHCI);
+document.forms['frmVboxSettings'].vboxSettingsUSBEnabledEHCI.checked = ($('#vboxSettingsDialog').data('vboxMachineData').USBController.enabledEhci);
 
 // clear list
 var list = $('#vboxSettingsUSBFilterList');
@@ -294,7 +295,7 @@ if(!$('#vboxSettingsUSBFilterList').find('li.vboxListItem').first().trigger('cli
 if($('#vboxSettingsUSBAddDevice').attr('id')) {
 	$('#vboxSettingsUSBAddDevice').empty();
 } else {
-	$('#vboxPane').append($('<ul />').attr({'class':'contextMenu contextMenuNoBG','style':'display: none','id':'vboxSettingsUSBAddDevice'}));
+	$('#vboxIndex').append($('<ul />').attr({'class':'contextMenu contextMenuNoBG','style':'display: none','id':'vboxSettingsUSBAddDevice'}));
 }
 
 /* Hidden element that menu is bound to */
@@ -329,7 +330,7 @@ $("#vboxSettingsUSBAddDeviceClick").contextMenu({
 /* Disable non-editable items when VM is running */
 $('#vboxSettingsDialog').one('show',function(){
 	
-	if(!$('#vboxSettingsDialog').data('vboxFullEdit')) {
+	if($('#vboxSettingsDialog').data('vboxMachineData').state == 'Running') {
 		
 		var p = $('#vboxSettingsUSBTable');
 		$(p).find('tr:not(.vboxRunningEnabled)').find('span').addClass('disabled');
@@ -344,7 +345,7 @@ $('#vboxSettingsDialog').bind('save',function(){
 
 	
 	$('#vboxSettingsDialog').data('vboxMachineData').USBController.enabled = (document.forms['frmVboxSettings'].vboxSettingsUSBEnabled.checked ? 1 : 0);
-	$('#vboxSettingsDialog').data('vboxMachineData').USBController.enabledEHCI = (document.forms['frmVboxSettings'].vboxSettingsUSBEnabledEHCI.checked ? 1 : 0);
+	$('#vboxSettingsDialog').data('vboxMachineData').USBController.enabledEhci = (document.forms['frmVboxSettings'].vboxSettingsUSBEnabledEHCI.checked ? 1 : 0);
 
 	$('#vboxSettingsDialog').data('vboxMachineData').USBController.deviceFilters = new Array();
 

@@ -4,11 +4,11 @@
 	
 	$Id$ 
  -->
-<div id='vboxSettingsPortForwarding' style='height: 100%'>
+<div id='vboxSettingsPortForwarding'>
 <table class='vboxInvisible'>
 <tr style='vertical-align: top'>
-<td style='width: 100%; height: 100%'>
-	<div id='vboxSettingsPortForwardingListDiv' class='vboxBordered' style='overflow: auto;'>
+<td style='width: 100%'>
+	<div class='vboxBordered'>
 		<table class='vboxHorizontal'>
 			<thead>
 				<tr>
@@ -20,7 +20,7 @@
 				<th class='translate'>Guest Port</th>
 				</tr>
 			</thead>
-			<tbody id='vboxSettingsPortForwardingList' class='vboxHover'></tbody>
+			<tbody id='vboxSettingsPortForwardingList'></tbody>
 		</table>
 	</div>
 </td><td id='vboxSettingsPortForwardingToolbar'></td>
@@ -40,7 +40,7 @@ $('#vboxSettingsPortForwarding').find('.translate').html(function(i,h){return tr
 var sButtons = new Array(
 	{
 		'name' : 'insportfwd',
-		'label' : trans('Insert new rule','UIMachineSettingsPortForwardingDlg'),
+		'label' : 'Insert new rule',
 		'icon' : 'controller_add',
 		'click' : function () {
 			var rname = null;
@@ -60,7 +60,7 @@ var sButtons = new Array(
 	},
 	{
 		'name' : 'delportfwd',
-		'label' : trans('Delete selected rule','UIMachineSettingsPortForwardingDlg'),
+		'label' : 'Delete selected rule',
 		'icon' : 'controller_remove',
 		'click' : function () {
 			$('#vboxSettingsPortForwardingList').children('tr.vboxListItemSelected').first().remove();
@@ -70,18 +70,19 @@ var sButtons = new Array(
 	}
 );
 var pfToolbar = new vboxToolbarSmall(sButtons);
+pfToolbar.context = 'UIMachineSettingsPortForwardingDlg';
 pfToolbar.addButtons('vboxSettingsPortForwardingToolbar');
 
 
-$('#vboxSettingsPortForwardingList').bind('select',function(e,el){pfToolbar.update(el);});
+$('#vboxSettingsPortForwardingList').bind('select',pfToolbar.update);
 $('#vboxSettingsPortForwardingList').trigger('select');
 
 /* Edit rule element */
 function vboxSettingsPortForwardingEdit(td,type) {
-	var ex = $(td).parent().data('vboxRule')[$(td).data('vboxPane')];
+	var ex = $(td).parent().data('vboxRule')[$(td).data('vboxIndex')];
 	$(td).html('');
-	$('<input />').data('vboxPane',$(td).data('vboxPane')).attr({'class':'vboxText'}).val(ex).blur(function(){
-		switch($(this).data('vboxPane')) {
+	$('<input />').data('vboxIndex',$(td).data('vboxIndex')).attr({'class':'vboxText'}).val(ex).blur(function(){
+		switch($(this).data('vboxIndex')) {
 			/* name */
 			case 0:
 				$(this).val(jQuery.trim($(this).val().replace(',','')));
@@ -101,7 +102,7 @@ function vboxSettingsPortForwardingEdit(td,type) {
 				else if($(this).val() > 65535) $(this).val('65535');
 				break;
 		}
-		$(this).parent().parent().data('vboxRule')[$(this).data('vboxPane')] = $(this).val();
+		$(this).parent().parent().data('vboxRule')[$(this).data('vboxIndex')] = $(this).val();
 		var ex = $(this).val();
 		$(this).replaceWith($('<div />').html(ex).text());
 	}).css({'width':($(td).innerWidth()-12)+'px','padding':'0px','margin':'0px'}).keydown(function(event){
@@ -109,7 +110,7 @@ function vboxSettingsPortForwardingEdit(td,type) {
 			$(this).trigger('blur');
 			return;
 		}
-		switch($(this).data('vboxPane')) {
+		switch($(this).data('vboxIndex')) {
 			/* name */
 			case 0:
 				if(event.keyCode == 188) return false; // no commas
@@ -147,41 +148,35 @@ function vboxSettingsPortForwardingAdd(r) {
 	var rule = r.split(',');
 	var tr = $('<tr />').attr({'class':'vboxListItem'});
 	
-	$('<td />').data('vboxPane',0).html($('<div />').html(rule[0]).text()).click(function(){
+	$('<td />').data('vboxIndex',0).html($('<div />').html(rule[0]).text()).click(function(){
 		if($(this).parent().hasClass('vboxListItemSelected')) {
 			vboxSettingsPortForwardingEdit(this,'name');
 			return;
 		}
-		$(this).parent().addClass('vboxListItemSelected').removeClass('vboxHover').siblings().removeClass('vboxListItemSelected');
+		$(this).parent().addClass('vboxListItemSelected').siblings().removeClass('vboxListItemSelected');
 		$('#vboxSettingsPortForwardingList').trigger('select',$(this).parent());
-	}).addClass('vboxHoverFirst').appendTo(tr);
+	}).appendTo(tr);
 	
 	$('<td />').click(function(){
 		if($(this).parent().hasClass('vboxListItemSelected')) {
 			vboxSettingsPortForwardingEditProto(this);
 			return;
 		}
-		$(this).parent().addClass('vboxListItemSelected').removeClass('vboxHover').siblings().removeClass('vboxListItemSelected');
+		$(this).parent().addClass('vboxListItemSelected').siblings().removeClass('vboxListItemSelected');
 		$('#vboxSettingsPortForwardingList').trigger('select',$(this).parent());
-	}).addClass('vboxProto vboxHoverMid').html(trans(rule[1] == 1 ? 'TCP' : 'UDP','VBoxGlobal')).appendTo(tr);
+	}).addClass('vboxProto').html(trans(rule[1] == 1 ? 'TCP' : 'UDP','VBoxGlobal')).appendTo(tr);
 	
 	for(var i = 2; i < rule.length; i++) {
-		$('<td />').data('vboxPane',i).click(function(){
+		$('<td />').data('vboxIndex',i).click(function(){
 			if($(this).parent().hasClass('vboxListItemSelected')) {
 				vboxSettingsPortForwardingEdit(this,'port');
 				return;
 			}
-			$(this).parent().addClass('vboxListItemSelected').removeClass('vboxHover').siblings().removeClass('vboxListItemSelected');
+			$(this).parent().addClass('vboxListItemSelected').siblings().removeClass('vboxListItemSelected');
 			$('#vboxSettingsPortForwardingList').trigger('select',$(this).parent());
-		}).addClass('vboxHover' + (i == (rule.length-1) ? 'Last' : 'Mid'))
-			.html($('<div />').html(rule[i]).text()).addClass((i%2 ? 'vboxPort' : 'vboxIP')).appendTo(tr);
+		}).html($('<div />').html(rule[i]).text()).addClass((i%2 ? 'vboxPort' : 'vboxIP')).appendTo(tr);
 	}
-	$(tr).data({'vboxRule':rule}).hover(function(){
-		if(!$(this).hasClass('vboxListItemSelected'))
-			$(this).addClass('vboxHover');
-	},function(){
-		$(this).removeClass('vboxHover');
-	}).appendTo($('#vboxSettingsPortForwardingList'));
+	$(tr).data({'vboxRule':rule}).appendTo($('#vboxSettingsPortForwardingList'));
 	
 }
 function vboxSettingsPortForwardingInit(rules) {

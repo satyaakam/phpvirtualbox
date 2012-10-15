@@ -38,7 +38,7 @@ var sButtons = new Array(
 
 	{
 		'name' : 'addUser',
-		'label' : trans('Add User','UIUsers'),
+		'label' : 'Add User',
 		'icon' : 'new',
 		'click' : function () {
 	
@@ -92,10 +92,10 @@ var sButtons = new Array(
 
 	{
 		'name' : 'delUser',
-		'label' : trans('Remove User','UIUsers'),
+		'label' : 'Remove User',
 		'icon' : 'delete',
 		'noDisabledIcon' : true,
-		'enabled' : function (item) { return (item && $(item).data('username') && $(item).data('username') != $('#vboxPane').data('vboxSession').user); },
+		'enabled' : function (item) { return (item && $(item).data('username') && $(item).data('username') != $('#vboxIndex').data('vboxSession').user); },
 		'click' : function () {
 			var buttons = {};
 			buttons[trans('OK','QIMessageBox')] = function() {
@@ -116,10 +116,10 @@ var sButtons = new Array(
 	},
 	{
 		'name' : 'chpwUser',
-		'label' : trans('Change Password','UIUsers'),
+		'label' : 'Change Password',
 		'icon' : 'register',
 		'noDisabledIcon' : true,
-		'enabled' : function (item) { return (item && $(item).data('username') && $(item).data('username') == $('#vboxPane').data('vboxSession').user); },
+		'enabled' : function (item) { return (item && $(item).data('username') && $(item).data('username') == $('#vboxIndex').data('vboxSession').user); },
 		'click' : function () {
 			var l = new vboxLoader();
 			l.addFileToDOM('panes/userEdit.html');
@@ -169,10 +169,10 @@ var sButtons = new Array(
 	},
 	{
 		'name' : 'editUser',
-		'label' : trans('Edit User','UIUsers'),
+		'label' : 'Edit User',
 		'icon' : 'register',
 		'noDisabledIcon' : true,
-		'enabled' : function (item) { return (item && $(item).data('username') && $(item).data('username') != $('#vboxPane').data('vboxSession').user); },
+		'enabled' : function (item) { return (item && $(item).data('username') && $(item).data('username') != $('#vboxIndex').data('vboxSession').user); },
 		'click' : function () {
 			
 			var l = new vboxLoader();
@@ -224,9 +224,10 @@ var sButtons = new Array(
 );
 
 var userToolbar = new vboxToolbarSmall(sButtons);
+userToolbar.context = 'UIUsers';
 userToolbar.disabledString = 'dis';
 userToolbar.addButtons('vboxSettingsGlobalUsersToolbar');
-$('#vboxSettingsUserList').bind('select', function(e,el){userToolbar.update(el);});
+$('#vboxSettingsUserList').bind('select',userToolbar.update);
 
 /*
  *

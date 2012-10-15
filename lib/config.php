@@ -10,12 +10,6 @@
  * @see config.php-example
  * 
 */
-
-/*
- * This version of phpVirtualBox
- */
-define('PHPVBOX_VER', '4.2-2');
-
 class phpVBoxConfigClass {
 
 	/* DEFAULTS */
@@ -26,12 +20,6 @@ class phpVBoxConfigClass {
 	 */
 	var $language = 'en';
 
-	/**
-	 * Exclusively use phpVirtualBox groups rather than
-	 * VirtualBox groups
-	 */
-	var $phpVboxGroups = false;
-	
 	/**
 	 * Preview screen width
 	 * @var integer
@@ -76,10 +64,16 @@ class phpVBoxConfigClass {
 	var $nicMax = 4;
 
 	/**
-	 * Max number of operations to keep in progress list
-	 * @var integer
+	 * Refresh VM cache when opening a VM settings dialog
+	 * @var boolean
 	 */
-	var $maxProgressList = 5;
+	var $vmConfigRefresh = true;
+
+	/**
+	 * VM list sort order
+	 * @var string
+	 */
+	var $vmListSort = 'name';
 	
 	/**
 	 * Enable custom icon per VM
@@ -88,17 +82,34 @@ class phpVBoxConfigClass {
 	var $enableCustomIcons = false;
 
 	/**
+	 * Cache settings that dictate the length of time an item can be cached before it is considered stale.
+	 * 
+	 * @var array
+	 * @see vboxconnector
+	 * @see cache
+	 */
+	var $cacheSettings = array(
+		'hostGetDetails' => 86400, // "never" changes. 1 day
+		'vboxGetGuestOSTypes' => 86400,
+		'vboxSystemPropertiesGet' => 86400,
+		'hostGetNetworking' => 86400,
+		'vboxGetMedia' => 600, // 10 minutes
+		'vboxGetMachines' => 2,
+		'_machineGetDetails' => 7200, // 2 hours
+		'_machineGetNetworkAdapters' => 7200,
+		'_machineGetStorageControllers' => 7200,
+		'_machineGetSerialPorts' => 7200,
+		'_machineGetParallelPorts' => 7200,
+		'_machineGetSharedFolders' => 7200,
+		'_machineGetUSBController' => 7200,
+		'vboxMachineSortOrderGet' => 300 // 5 minutes
+	);
+
+	/**
 	 * true if there is no user supplied config.php found.
 	 * @var boolean
 	 */
 	var $warnDefault = false;
-
-	/**
-	 * Set the standard VRDE port number range to be used when
-	 * creating new VMs
-	 * @var string
-	 */
-	var $vrdeports = '9000-9010';
 	
 	/**
 	 * Key used to uniquely identify the current server in this
@@ -147,6 +158,10 @@ class phpVBoxConfigClass {
 				if($k == 'browserRestrictFiles' && !is_array($v)) continue;
 				if($k == 'consoleResolutions' && !is_array($v)) continue;
 				if($k == 'browserRestrictFolders' && !is_array($v)) continue;
+				if($k == 'cacheSettings' && is_array($v)) {
+					$this->cacheSettings = array_merge($this->cacheSettings,$v);
+					continue;
+				}
 				$this->$k = $v;
 			}
 				
