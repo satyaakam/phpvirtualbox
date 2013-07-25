@@ -1103,17 +1103,14 @@ function vboxVMsettingsDialog(vm,pane) {
 					break;
 					
 				case 'OnMachineDataChanged':
-				case 'OnNetworkAdapterChanged':
 				case 'OnVRDEServerChanged':
 				case 'OnVRDEServerInfoChanged':
 				case 'OnCPUChanged':
 				case 'OnNetworkAdapterChanged':
 				case 'OnStorageControllerChanged':
 				case 'OnMediumChanged':
-				case 'OnVRDEServerChanged':
 				case 'OnUSBControllerChanged':
 				case 'OnSharedFolderChanged':
-				case 'OnVRDEServerInfoChanged':
 				case 'OnCPUExecutionCapChanged':
 				case 'OnStorageDeviceChanged':
 
